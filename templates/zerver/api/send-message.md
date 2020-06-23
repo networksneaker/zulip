@@ -65,6 +65,25 @@ zulip-send --stream Denmark --subject Castle \
 You can omit the `user` and `api-key` parameters if you have a `~/.zuliprc`
 file.
 
+{tab|PowerShell}
+
+```powershell
+$User = "BOT_EMAIL_ADDRESS"
+$Pass = ConvertTo-SecureString -String "BOT_API_KEY" -AsPlainText -Force
+$Url = "https://yourZulipDomain.zulipchat.com/api/v1/messages"
+
+$Cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Pass
+
+$Body = @{
+    type    = "stream"
+    to      = "Denmark"
+    subject = "Castle"
+    content = "I come not, friends, to steal away your hearts."
+}
+
+Invoke-RestMethod -Method Post -Uri $url -Credential $Cred -Body $body
+```
+
 {end_tabs}
 
 ## Parameters
